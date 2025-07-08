@@ -10,4 +10,13 @@ function some<T>(data: T): t<T> {
   return { kind: "some", value: data }
 }
 
-export { type t, none, some }
+function get<T>(option: t<T>): T {
+  switch (option.kind) {
+    case "none":
+      throw new Error('invalid argument')
+    case "some":
+      return option.value
+  }
+}
+
+export { type t, none, some, get }
